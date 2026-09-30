@@ -1,0 +1,109 @@
+@import 'tailwindcss';
+@import 'slick-carousel/slick/slick.css';
+@import 'slick-carousel/slick/slick-theme.css';
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+
+  --font-lato: var(--font-lato);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  --font-lato: var(--font-lato);
+
+  --shadow-gradient:
+    box-shadow: 0px 0px 0px 1px rgba(10, 13, 18, 0.18),
+    0px 1px 2px 0px rgba(10, 13, 18, 0.05) inset, 0px -2px 0px 0px rgba(10, 13, 18, 0.05) inset;
+}
+
+@theme {
+  --color-cv-primary-10: #f5f6fa;
+  --color-cv-primary-25: #f0f1f5;
+  --color-cv-primary-50: #e6e9f0;
+  --color-cv-primary-100: #b0bbd1;
+  --color-cv-primary-200: #8a9abb;
+  --color-cv-primary-300: #546c9c;
+  --color-cv-primary-400: #335089;
+  --color-cv-primary-500: #00246b;
+  --color-cv-primary-600: #002161;
+  --color-cv-primary-700: #001a4c;
+  --color-cv-primary-800: #00143b;
+  --color-cv-primary-900: #000f2d;
+
+  --color-cv-secondary-10: #f5faf5;
+  --color-cv-secondary-25: #eef5ee;
+  --color-cv-secondary-50: #e6f5e6;
+  --color-cv-secondary-100: #b3e1b0;
+  --color-cv-secondary-200: #8ed28a;
+  --color-cv-secondary-300: #5abd55;
+  --color-cv-secondary-400: #3ab134;
+  --color-cv-secondary-500: #099d01;
+  --color-cv-secondary-600: #088f01;
+  --color-cv-secondary-700: #066f01;
+  --color-cv-secondary-800: #055601;
+  --color-cv-secondary-900: #044200;
+
+  --color-cv-gray-10: #f9fafb;
+  --color-cv-gray-25: #f3f4f5;
+  --color-cv-gray-50: #eaebec;
+  --color-cv-gray-100: #bdc0c5;
+  --color-cv-gray-200: #9da2a9;
+  --color-cv-gray-300: #717882;
+  --color-cv-gray-400: #555d6a;
+  --color-cv-gray-500: #2b3545;
+  --color-cv-gray-600: #27303f;
+  --color-cv-gray-700: #1f2631;
+  --color-cv-gray-800: #1f2631;
+  --color-cv-gray-900: #12161d;
+
+  --color-cv-solid-white: white;
+  --color-cv-solid-black: #1f2631;
+
+  --color-cv-status-info: #008eff;
+  --color-cv-status-info-shadow: #ecf6fe;
+  --color-cv-status-action: #e89600;
+  --color-cv-status-action-shadow: #fff8eb;
+  --color-cv-status-warning: #ff5c00;
+  --color-cv-status-warning-shadow: #fff2eb;
+  --color-cv-status-success: #08a100;
+  --color-cv-status-success-shadow: #ecfdf5;
+  --color-cv-status-error: #ff2626;
+  --color-cv-status-error-shadow: #e9ebf8;
+}
+
+@utility btn-gradient {
+  @apply relative cursor-pointer text-white font-semibold text-[16px] rounded-lg transition-all duration-200 ease-in-out;
+  background: #099d01;
+  padding: 12px 16px;
+  border: 2px solid transparent;
+  border-image: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0)) 1;
+  box-shadow:
+    0px 0px 0px 1px rgba(10, 13, 18, 0.18),
+    0px 1px 2px 0px rgba(10, 13, 18, 0.05) inset,
+    0px -2px 0px 0px rgba(10, 13, 18, 0.05) inset;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+@utility btn-base {
+  @apply border border-[#D5D7DA] rounded-lg bg-white text-base/5.5 font-semibold cursor-pointer shadow-gradient py-2.5 px-4.75 text-[#2B3545] hover:bg-gray-300/50;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  font-family: var(--font-lato);
+  color: var(--color-cv-gray-900);
+}
