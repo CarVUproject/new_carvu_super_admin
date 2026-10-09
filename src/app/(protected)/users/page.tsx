@@ -86,6 +86,7 @@ export default function UsersPage() {
       full_name: '',
       phone: '',
       is_active: false,
+      is_dealer: false,
       roles: [],
     },
   });
@@ -99,6 +100,7 @@ export default function UsersPage() {
       full_name: selectedUser.full_name ?? '',
       phone: selectedUser.phone ?? '',
       is_active: selectedUser.is_active,
+      is_dealer: selectedUser.is_dealer,
       roles: selectedUser.roles ?? [],
     });
   }, [form, selectedUser]);
@@ -192,6 +194,7 @@ export default function UsersPage() {
         full_name: values.full_name,
         phone: values.phone ?? '',
         is_active: values.is_active,
+        is_dealer: values.is_dealer,
         roles: values.roles,
       },
     }).unwrap();
@@ -341,6 +344,29 @@ export default function UsersPage() {
                   User account is active
                 </span>
               </label>
+
+              <div className="rounded-2xl border border-cv-gray-50 bg-cv-gray-10 px-4 py-3">
+                <label className="flex items-center gap-3">
+                  <input
+                    type="checkbox"
+                    checked={form.watch('is_dealer')}
+                    onChange={(event) =>
+                      form.setValue('is_dealer', event.target.checked, {
+                        shouldDirty: true,
+                      })
+                    }
+                    className="size-4 rounded border-cv-gray-50"
+                  />
+                  <span className="text-sm font-semibold text-cv-gray-900">Dealer account</span>
+                </label>
+                <p className="mt-1 pl-7 text-xs text-cv-gray-400">
+                  Fixes mislabeled signups (shows as a plain customer, or the account doesn&apos;t
+                  carry dealer permissions). This alone does not create a Dealer record for the
+                  Dealers approval page -- the user still needs to submit dealer registration for
+                  that, or you can assign a role with vehicle:create/hub:create/hub:view below so
+                  pushes and dealer actions work immediately.
+                </p>
+              </div>
 
               <div className="grid gap-3">
                 <div className="space-y-1">

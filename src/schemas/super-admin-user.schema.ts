@@ -4,6 +4,7 @@ export const superAdminUserSchema = z.object({
   full_name: z.string().min(1, 'Full name is required'),
   phone: z.string().optional(),
   is_active: z.boolean(),
+  is_dealer: z.boolean(),
   roles: z.array(z.string()),
 });
 
