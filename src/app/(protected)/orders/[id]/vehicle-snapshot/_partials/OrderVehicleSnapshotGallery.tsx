@@ -29,9 +29,7 @@ const PLACEHOLDER_IMAGE = '/assets/images/vehicle_placeholder.jpg';
 const normalizeCategory = (value?: string) => (value || 'Vehicle').trim().toLowerCase();
 
 const formatCategory = (value?: string) =>
-  (value || 'Vehicle')
-    .replaceAll('_', ' ')
-    .replace(/\b\w/g, (char) => char.toUpperCase());
+  (value || 'Vehicle').replaceAll('_', ' ').replace(/\b\w/g, (char) => char.toUpperCase());
 
 const buildImageList = (
   coverUrl: string | undefined,
@@ -140,7 +138,11 @@ export function OrderVehicleSnapshotGallery({ coverUrl, images, title }: Props) 
             className="relative block aspect-[16/10] overflow-hidden rounded-2xl border border-cv-gray-50 bg-cv-gray-10 text-left lg:aspect-auto lg:h-[464px]"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={mainImage.image} alt={mainImage.title || title} className="h-full w-full object-cover" />
+            <img
+              src={mainImage.image}
+              alt={mainImage.title || title}
+              className="h-full w-full object-cover"
+            />
             <span className="absolute right-4 top-4 inline-flex items-center gap-2 rounded-xl bg-white/95 px-4 py-3 text-sm font-bold text-cv-gray-900 shadow-sm">
               <Images className="size-4" />
               View Full Gallery
@@ -243,6 +245,10 @@ const GalleryPreviewTile = ({
     className="relative aspect-[4/3] cursor-pointer overflow-hidden rounded-2xl border border-cv-gray-50 bg-cv-gray-10 lg:aspect-auto lg:h-[224px]"
   >
     {/* eslint-disable-next-line @next/next/no-img-element */}
-    <img src={image.image} alt={image.title || 'Vehicle preview'} className="h-full w-full object-cover" />
+    <img
+      src={image.image}
+      alt={image.title || 'Vehicle preview'}
+      className="h-full w-full object-cover"
+    />
   </button>
 );

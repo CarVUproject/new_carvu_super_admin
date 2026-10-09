@@ -5,9 +5,7 @@ import { HiOutlineArrowLeft } from 'react-icons/hi2';
 import { CalendarClock, CarFront, ExternalLink, FileText, Gauge, ShieldCheck } from 'lucide-react';
 
 import { AdminPageScaffold, AdminSectionCard } from '@/components/admin/AdminPageScaffold';
-import {
-  useGetSuperAdminOrderVehicleSnapshotQuery,
-} from '@/features/super-admin/superAdminApi';
+import { useGetSuperAdminOrderVehicleSnapshotQuery } from '@/features/super-admin/superAdminApi';
 import { formatCurrency, titleCase } from '@/lib/format';
 import type {
   OrderVehicleSnapshotAiInspection,
@@ -70,9 +68,7 @@ function formatText(value?: unknown) {
 function SnapshotKeyValue({ label, value }: { label: string; value?: unknown }) {
   return (
     <div className="rounded-xl border border-cv-gray-50 px-4 py-3">
-      <p className="text-xs font-semibold uppercase tracking-[0.12em] text-cv-gray-300">
-        {label}
-      </p>
+      <p className="text-xs font-semibold uppercase tracking-[0.12em] text-cv-gray-300">{label}</p>
       <p className="mt-1 font-semibold text-cv-gray-900">{formatText(value)}</p>
     </div>
   );
@@ -111,11 +107,7 @@ function PartySnapshotCard({
   );
 }
 
-function AiInspectionSection({
-  aiInspection,
-}: {
-  aiInspection: OrderVehicleSnapshotAiInspection;
-}) {
+function AiInspectionSection({ aiInspection }: { aiInspection: OrderVehicleSnapshotAiInspection }) {
   const condition = aiInspection.condition_bucket || 'none';
   const meta = CONDITION_META[condition];
 
@@ -134,9 +126,7 @@ function AiInspectionSection({
           <section className="grid gap-2.5">
             <div className="flex items-center gap-2">
               <div className="size-[18px] shrink-0 rounded-full bg-cv-secondary-600" />
-              <p className="text-sm font-medium text-cv-gray-500">
-                Green (8.5 - 10.0) = Excellent
-              </p>
+              <p className="text-sm font-medium text-cv-gray-500">Green (8.5 - 10.0) = Excellent</p>
             </div>
             <div className="flex items-center gap-2">
               <div className="size-[18px] shrink-0 rounded-full bg-[#FFA500]" />
@@ -235,7 +225,11 @@ function CarfaxSection({
             rel="noreferrer"
             className="inline-flex items-center gap-2 rounded-xl border border-cv-primary-500 px-4 py-3 text-sm font-semibold text-cv-primary-500 transition-colors hover:bg-cv-gray-10"
           >
-            {carfax.pdf?.url ? <FileText className="size-4" /> : <ExternalLink className="size-4" />}
+            {carfax.pdf?.url ? (
+              <FileText className="size-4" />
+            ) : (
+              <ExternalLink className="size-4" />
+            )}
             Open Captured Report
           </a>
         ) : null}
@@ -330,13 +324,19 @@ export function OrderVehicleSnapshotView({ orderId }: Props) {
           title={formatText(vehicle.title)}
         />
 
-        <AdminSectionCard title="Snapshot Summary" description="Core purchase-time vehicle and order context.">
+        <AdminSectionCard
+          title="Snapshot Summary"
+          description="Core purchase-time vehicle and order context."
+        >
           <div className="space-y-4">
             <p className="max-w-5xl text-sm leading-6 text-cv-gray-400">
               {formatText(vehicle.short_description)}
             </p>
             <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-              <SnapshotKeyValue label="Final Price" value={formatCurrency(order.final_price as string)} />
+              <SnapshotKeyValue
+                label="Final Price"
+                value={formatCurrency(order.final_price as string)}
+              />
               <SnapshotKeyValue label="Source" value={source.type || data.source_type} />
               <SnapshotKeyValue label="Order Status" value={order.status} />
               <SnapshotKeyValue label="VIN" value={vehicle.vin} />
@@ -344,7 +344,10 @@ export function OrderVehicleSnapshotView({ orderId }: Props) {
           </div>
         </AdminSectionCard>
 
-        <AdminSectionCard title="Vehicle Overview" description="Vehicle details shown at order creation.">
+        <AdminSectionCard
+          title="Vehicle Overview"
+          description="Vehicle details shown at order creation."
+        >
           <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
             <SnapshotKeyValue label="Year" value={vehicle.make_year} />
             <SnapshotKeyValue label="Model" value={vehicle.model} />
@@ -357,7 +360,10 @@ export function OrderVehicleSnapshotView({ orderId }: Props) {
           </div>
         </AdminSectionCard>
 
-        <AdminSectionCard title="Specifications" description="Captured body and mechanical specifications.">
+        <AdminSectionCard
+          title="Specifications"
+          description="Captured body and mechanical specifications."
+        >
           <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
             <SnapshotKeyValue label="Body" value={details.body} />
             <SnapshotKeyValue label="Drive Type" value={details.drive_type} />
@@ -369,7 +375,7 @@ export function OrderVehicleSnapshotView({ orderId }: Props) {
           </div>
         </AdminSectionCard>
 
-        {(aiInspection || carfax) ? (
+        {aiInspection || carfax ? (
           <section className="grid gap-6 lg:grid-cols-2">
             {aiInspection ? <AiInspectionSection aiInspection={aiInspection} /> : null}
             {carfax ? <CarfaxSection carfax={carfax} reportUrl={carfaxReportUrl} /> : null}
@@ -377,7 +383,10 @@ export function OrderVehicleSnapshotView({ orderId }: Props) {
         ) : null}
 
         <section className="grid gap-6 lg:grid-cols-2">
-          <AdminSectionCard title="Captured Features" description="Feature set captured with the order snapshot.">
+          <AdminSectionCard
+            title="Captured Features"
+            description="Feature set captured with the order snapshot."
+          >
             {features.length ? (
               <div className="flex flex-wrap gap-2">
                 {features.map((feature, index) => (
@@ -394,7 +403,10 @@ export function OrderVehicleSnapshotView({ orderId }: Props) {
             )}
           </AdminSectionCard>
 
-          <AdminSectionCard title="Modifications" description="Modifications captured with the order snapshot.">
+          <AdminSectionCard
+            title="Modifications"
+            description="Modifications captured with the order snapshot."
+          >
             {modifications.length ? (
               <div className="flex flex-wrap gap-2">
                 {modifications.map((item, index) => (
@@ -417,12 +429,21 @@ export function OrderVehicleSnapshotView({ orderId }: Props) {
           <PartySnapshotCard title="Seller" party={seller} />
         </section>
 
-        <AdminSectionCard title="Order Context" description="Financial and lifecycle context for this order.">
+        <AdminSectionCard
+          title="Order Context"
+          description="Financial and lifecycle context for this order."
+        >
           <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-4">
             <SnapshotKeyValue label="Order ID" value={order.id || data.order} />
             <SnapshotKeyValue label="Source ID" value={source.id || data.source_id} />
-            <SnapshotKeyValue label="Retainer" value={formatCurrency(order.retainer_amount as string)} />
-            <SnapshotKeyValue label="Platform Fee" value={formatCurrency(order.platform_fee_amount as string)} />
+            <SnapshotKeyValue
+              label="Retainer"
+              value={formatCurrency(order.retainer_amount as string)}
+            />
+            <SnapshotKeyValue
+              label="Platform Fee"
+              value={formatCurrency(order.platform_fee_amount as string)}
+            />
             <SnapshotKeyValue label="Completion Deadline" value={order.completion_deadline_at} />
             <SnapshotKeyValue label="Snapshot Created" value={data.created_at} />
           </div>

@@ -119,7 +119,8 @@ const DECISION_HELP: Record<string, { title: string; description: string }> = {
   },
   mutual_settlement_recorded: {
     title: 'Mutual settlement recorded',
-    description: 'Records a buyer/seller settlement and creates payment work only if money is still owed.',
+    description:
+      'Records a buyer/seller settlement and creates payment work only if money is still owed.',
   },
   closed_insufficient_evidence: {
     title: 'Closed insufficient evidence',
@@ -876,8 +877,7 @@ export function ArbitrationCaseDetailView({ id }: { id: string }) {
   const [addNote, addNoteState] = useAddSuperAdminArbitrationNoteMutation();
   const [escalateCase, escalateState] = useEscalateSuperAdminArbitrationCaseMutation();
   const [issueDecision, issueDecisionState] = useIssueSuperAdminArbitrationDecisionMutation();
-  const [previewDecision, previewDecisionState] =
-    usePreviewSuperAdminArbitrationDecisionMutation();
+  const [previewDecision, previewDecisionState] = usePreviewSuperAdminArbitrationDecisionMutation();
   const [requestInspection, requestInspectionState] =
     useRequestSuperAdminArbitrationInspectionMutation();
 
@@ -948,10 +948,7 @@ export function ArbitrationCaseDetailView({ id }: { id: string }) {
       if (!hasCompensationAmount) {
         decisionForm.setValue('compensation_amount', data.claimed_amount);
       }
-      decisionForm.setValue(
-        'compensation_payer',
-        hasCompensationAmount ? 'seller' : '',
-      );
+      decisionForm.setValue('compensation_payer', hasCompensationAmount ? 'seller' : '');
       decisionForm.setValue('create_compensation_obligation', true);
       decisionForm.setValue('order_outcome', 'completed_with_adjustment');
       if (shouldLockSellerResponsibility) {
@@ -1409,7 +1406,10 @@ export function ArbitrationCaseDetailView({ id }: { id: string }) {
                 </div>
               </div>
             ) : (
-              <form className="space-y-4" onSubmit={decisionForm.handleSubmit(handlePreviewDecision)}>
+              <form
+                className="space-y-4"
+                onSubmit={decisionForm.handleSubmit(handlePreviewDecision)}
+              >
                 <Controller
                   control={decisionForm.control}
                   name="decision_type"
@@ -1525,28 +1525,26 @@ export function ArbitrationCaseDetailView({ id }: { id: string }) {
 
                 {canUseCompensationFields && hasCompensationAmount ? (
                   <div className="space-y-3 rounded-2xl border border-cv-gray-50 bg-cv-gray-10 px-4 py-4">
-                  <Controller
-                    control={decisionForm.control}
-                    name="create_compensation_obligation"
-                    render={({ field }) => (
-                      <label className="flex items-start gap-3 text-sm font-semibold text-cv-gray-600">
-                        <input
-                          type="checkbox"
-                          checked={field.value}
-                          onChange={(event) => field.onChange(event.target.checked)}
-                          className="mt-1"
-                        />
-                        Create compensation obligation
-                      </label>
-                    )}
-                  />
+                    <Controller
+                      control={decisionForm.control}
+                      name="create_compensation_obligation"
+                      render={({ field }) => (
+                        <label className="flex items-start gap-3 text-sm font-semibold text-cv-gray-600">
+                          <input
+                            type="checkbox"
+                            checked={field.value}
+                            onChange={(event) => field.onChange(event.target.checked)}
+                            className="mt-1"
+                          />
+                          Create compensation obligation
+                        </label>
+                      )}
+                    />
                   </div>
                 ) : null}
 
                 <div className="rounded-2xl border border-cv-gray-50 bg-white px-4 py-4">
-                  <p className="text-sm font-semibold text-cv-gray-600">
-                    Review before issuing
-                  </p>
+                  <p className="text-sm font-semibold text-cv-gray-600">Review before issuing</p>
                   <p className="mt-2 text-sm leading-6 text-cv-gray-500">
                     Use the review step to fetch the backend-calculated order outcome, obligation
                     list, and warnings before the decision is recorded.
