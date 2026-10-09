@@ -652,6 +652,7 @@ export type UpdateUserPayload = Partial<{
   full_name: string;
   phone: string;
   is_active: boolean;
+  is_dealer: boolean;
   roles: string[];
 }>;
 
